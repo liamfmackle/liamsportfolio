@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
 import ProjectResume from "../components/ProjectResume";
@@ -6,6 +6,8 @@ import Socials from "../components/Socials";
 import Button from "../components/Button";
 import { useTheme } from "next-themes";
 import Head from "next/head";
+import { useIsomorphicLayoutEffect } from "../utils";
+import { slideInUp, staggerChildren } from "../animations";
 // Data
 import { name, showResume } from "../data/portfolio.json";
 import { resume } from "../data/portfolio.json";
@@ -15,6 +17,9 @@ const Resume = () => {
   const router = useRouter();
   const theme = useTheme();
   const [mount, setMount] = useState(false);
+  const headerRef = useRef();
+  const experienceRef = useRef();
+  const skillsRef = useRef();
 
   useEffect(() => {
     setMount(true);
@@ -22,6 +27,18 @@ const Resume = () => {
       router.push("/");
     }
   }, []);
+
+  useIsomorphicLayoutEffect(() => {
+    if (mount && headerRef.current) {
+      slideInUp(headerRef.current, 0.5, 0.1);
+    }
+    if (mount && experienceRef.current) {
+      staggerChildren(experienceRef.current, 0.2);
+    }
+    if (mount && skillsRef.current) {
+      staggerChildren(skillsRef.current, 0.3);
+    }
+  }, [mount]);
   return (
     <>
       <Head>
@@ -50,15 +67,17 @@ const Resume = () => {
                 mount && theme.theme === "dark" ? "bg-slate-800" : "bg-gray-50"
               } max-w-4xl p-20 mob:p-5 desktop:p-20 rounded-lg shadow-sm`}
             >
-              <h1 className="text-3xl font-bold">{name}</h1>
-              <h2 className="text-xl mt-5">{resume.tagline}</h2>
-              <h2 className="w-4/5 text-xl mt-5 opacity-50">
-                {resume.description}
-              </h2>
-              <div className="mt-2">
-                <Socials />
+              <div ref={headerRef}>
+                <h1 className="text-3xl font-bold">{name}</h1>
+                <h2 className="text-xl mt-5">{resume.tagline}</h2>
+                <h2 className="w-4/5 text-xl mt-5 opacity-50">
+                  {resume.description}
+                </h2>
+                <div className="mt-2">
+                  <Socials />
+                </div>
               </div>
-              <div className="mt-5">
+              <div ref={experienceRef} className="mt-5">
                 <h1 className="text-2xl font-bold">Experience</h1>
 
                 {resume.experiences.map(
@@ -87,7 +106,7 @@ const Resume = () => {
               </div>
               <div className="mt-5">
                 <h1 className="text-2xl font-bold">Skills</h1>
-                <div className="flex mob:flex-col desktop:flex-row justify-between">
+                <div ref={skillsRef} className="flex mob:flex-col desktop:flex-row justify-between">
                   {resume.languages && (
                     <div className="mt-2 mob:mt-5">
                       <h2 className="text-lg">Languages</h2>
