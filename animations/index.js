@@ -1,4 +1,10 @@
 import gsap, { Power3, Power2 } from "gsap";
+import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
+
+// Register ScrollToPlugin
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollToPlugin);
+}
 
 // Stagger animation for multiple elements
 export const stagger = (target, fromVars, toVars) => {
@@ -70,4 +76,13 @@ export const staggerChildren = (parent, delay = 0) => {
       ease: Power3.easeOut,
     }
   );
+};
+
+// Smooth scroll to element
+export const smoothScrollTo = (target, duration = 1) => {
+  return gsap.to(window, {
+    duration,
+    scrollTo: { y: target, offsetY: 50 },
+    ease: Power3.easeInOut,
+  });
 };

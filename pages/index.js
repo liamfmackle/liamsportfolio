@@ -4,7 +4,7 @@ import ServiceCard from "../components/ServiceCard";
 import Socials from "../components/Socials";
 import WorkCard from "../components/WorkCard";
 import { useIsomorphicLayoutEffect } from "../utils";
-import { stagger } from "../animations";
+import { stagger, smoothScrollTo } from "../animations";
 import Footer from "../components/Footer";
 import Head from "next/head";
 import Button from "../components/Button";
@@ -22,21 +22,13 @@ export default function Home() {
   const textThree = useRef();
   const textFour = useRef();
 
-  // Handling Scroll
+  // Handling Scroll with smooth GSAP animation
   const handleWorkScroll = () => {
-    window.scrollTo({
-      top: workRef.current.offsetTop,
-      left: 0,
-      behavior: "smooth",
-    });
+    smoothScrollTo(workRef.current, 1);
   };
 
   const handleAboutScroll = () => {
-    window.scrollTo({
-      top: aboutRef.current.offsetTop,
-      left: 0,
-      behavior: "smooth",
-    });
+    smoothScrollTo(aboutRef.current, 1);
   };
 
   useIsomorphicLayoutEffect(() => {
