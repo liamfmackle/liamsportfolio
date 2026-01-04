@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Cursor from "../components/Cursor";
 import Header from "../components/Header";
 import ProjectResume from "../components/ProjectResume";
 import Socials from "../components/Socials";
 import Button from "../components/Button";
 import { useTheme } from "next-themes";
+import Head from "next/head";
 // Data
 import { name, showResume } from "../data/portfolio.json";
 import { resume } from "../data/portfolio.json";
@@ -24,6 +24,12 @@ const Resume = () => {
   }, []);
   return (
     <>
+      <Head>
+        <title>Resume | {data.name}</title>
+        <meta name="description" content={`Professional resume of ${data.name} - Central banking, policy analysis, and technical development experience.`} />
+        <meta property="og:title" content={`Resume | ${data.name}`} />
+        <meta property="og:description" content="Professional experience in central banking, markets, and technology." />
+      </Head>
       {process.env.NODE_ENV === "development" && (
         <div className="fixed bottom-6 right-6">
           <Button onClick={() => router.push("/edit")} type={"primary"}>
@@ -31,7 +37,6 @@ const Resume = () => {
           </Button>
         </div>
       )}
-      {data.showCursor && <Cursor />}
       <div
         className={`container mx-auto mb-10 ${
           data.showCursor && "cursor-none"

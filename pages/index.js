@@ -9,7 +9,6 @@ import Footer from "../components/Footer";
 import Head from "next/head";
 import Button from "../components/Button";
 import Link from "next/link";
-import Cursor from "../components/Cursor";
 
 // Local Data
 import data from "../data/portfolio.json";
@@ -43,20 +42,19 @@ export default function Home() {
   useIsomorphicLayoutEffect(() => {
     stagger(
       [textOne.current, textTwo.current, textThree.current, textFour.current],
-      { y: 40, x: -10, transform: "scale(0.95) skew(10deg)" },
+      { y: 30, x: 0, transform: "scale(0.98)" },
       { y: 0, x: 0, transform: "scale(1)" }
     );
   }, []);
 
   return (
-    <div className={`relative ${data.showCursor && "cursor-none"}`}>
-      {data.showCursor && <Cursor />}
+    <div className="relative">
       <Head>
-        <title>{data.name}</title>
+        <title>{data.name} | Policy, Markets & Technology</title>
+        <meta name="description" content="Portfolio of Liam Mackle - Central banking, investment analysis, and technical innovation." />
+        <meta property="og:title" content={`${data.name} | Policy, Markets & Technology`} />
+        <meta property="og:description" content="Central banking expertise meets technical innovation. Projects in policy analysis, markets modeling, and AI-assisted research." />
       </Head>
-
-      <div className="gradient-circle"></div>
-      <div className="gradient-circle-bottom"></div>
 
       <div className="container mx-auto mb-10">
         <Header
@@ -94,7 +92,7 @@ export default function Home() {
           <Socials className="mt-2 laptop:mt-5" />
         </div>
         <div className="mt-10 laptop:mt-30 p-2 laptop:p-0" ref={workRef}>
-          <h1 className="text-2xl text-bold">Work.</h1>
+          <h1 className="text-2xl text-bold">Projects.</h1>
 
           <div className="mt-5 laptop:mt-10 grid grid-cols-1 tablet:grid-cols-2 gap-4">
             {data.projects.map((project) => (
@@ -103,6 +101,8 @@ export default function Home() {
                 img={project.imageSrc}
                 name={project.title}
                 description={project.description}
+                techStack={project.techStack}
+                tags={project.tags}
                 onClick={() => window.open(project.url)}
               />
             ))}
@@ -110,7 +110,7 @@ export default function Home() {
         </div>
 
         <div className="mt-10 laptop:mt-30 p-2 laptop:p-0">
-          <h1 className="tablet:m-10 text-2xl text-bold">Services.</h1>
+          <h1 className="tablet:m-10 text-2xl text-bold">Focus Areas.</h1>
           <div className="mt-5 tablet:m-10 grid grid-cols-1 laptop:grid-cols-2 gap-6">
             {data.services.map((service, index) => (
               <ServiceCard
