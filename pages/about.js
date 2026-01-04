@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import Header from "../components/Header";
 import Socials from "../components/Socials";
 import Button from "../components/Button";
 import { useTheme } from "next-themes";
 import Head from "next/head";
+import { useIsomorphicLayoutEffect } from "../utils";
+import { slideInUp, staggerChildren } from "../animations";
 // Data
 import data from "../data/portfolio.json";
 
@@ -12,10 +14,25 @@ const About = () => {
   const router = useRouter();
   const { theme } = useTheme();
   const [mount, setMount] = useState(false);
+  const titleRef = useRef();
+  const contentRef = useRef();
+  const skillsRef = useRef();
 
   useEffect(() => {
     setMount(true);
   }, []);
+
+  useIsomorphicLayoutEffect(() => {
+    if (mount && titleRef.current) {
+      slideInUp(titleRef.current, 0.5, 0.1);
+    }
+    if (mount && contentRef.current) {
+      staggerChildren(contentRef.current, 0.2);
+    }
+    if (mount && skillsRef.current) {
+      staggerChildren(skillsRef.current, 0.3);
+    }
+  }, [mount]);
 
   const skillCategories = [
     {
@@ -54,10 +71,10 @@ const About = () => {
                 mount && theme === "dark" ? "bg-slate-800" : "bg-gray-50"
               } max-w-4xl p-20 mob:p-5 desktop:p-20 rounded-lg shadow-sm`}
             >
-              <h1 className="text-4xl font-bold">About Me</h1>
+              <h1 ref={titleRef} className="text-4xl font-bold">About Me</h1>
 
               {/* Bio Section */}
-              <div className="mt-8">
+              <div ref={contentRef} className="mt-8">
                 <p className="text-lg leading-relaxed opacity-80">
                   {data.aboutpara}
                 </p>
@@ -76,7 +93,7 @@ const About = () => {
               {/* Skills Matrix */}
               <div className="mt-10">
                 <h2 className="text-2xl font-bold mb-6">Skills & Expertise</h2>
-                <div className="grid grid-cols-1 tablet:grid-cols-2 gap-6">
+                <div ref={skillsRef} className="grid grid-cols-1 tablet:grid-cols-2 gap-6">
                   {skillCategories.map((category, index) => (
                     <div key={index} className="mb-4">
                       <h3 className="text-lg font-semibold mb-3">{category.title}</h3>
