@@ -59,12 +59,12 @@ const Resume = () => {
           data.showCursor && "cursor-none"
         }`}
       >
-        <Header isBlog />
+        <Header />
         {mount && (
           <div className="mt-10 w-full flex flex-col items-center">
             <div
               className={`w-full ${
-                mount && theme.theme === "dark" ? "bg-slate-800" : "bg-gray-50"
+                mount && theme.theme === "dark" ? "bg-navy-800" : "bg-navy-50"
               } max-w-4xl p-20 mob:p-5 desktop:p-20 rounded-lg shadow-sm`}
             >
               <div ref={headerRef}>

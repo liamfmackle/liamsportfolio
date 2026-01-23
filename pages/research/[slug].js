@@ -31,7 +31,7 @@ const ResearchPost = ({ post }) => {
       </Head>
 
       <div className="container mx-auto mt-10">
-        <Header isBlog={true} />
+        <Header />
         <div className="mt-10 flex flex-col">
           <img
             className="w-full h-96 rounded-lg shadow-lg object-cover"

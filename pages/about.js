@@ -1,21 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/router";
 import Header from "../components/Header";
 import Socials from "../components/Socials";
 import Button from "../components/Button";
 import { useTheme } from "next-themes";
 import Head from "next/head";
 import { useIsomorphicLayoutEffect } from "../utils";
-import { slideInUp, staggerChildren } from "../animations";
+import { slideInUp, staggerChildren, scrollReveal } from "../animations";
 // Data
 import data from "../data/portfolio.json";
 
 const About = () => {
-  const router = useRouter();
   const { theme } = useTheme();
   const [mount, setMount] = useState(false);
   const titleRef = useRef();
   const contentRef = useRef();
+  const focusRef = useRef();
   const skillsRef = useRef();
 
   useEffect(() => {
@@ -31,6 +30,15 @@ const About = () => {
     }
     if (mount && skillsRef.current) {
       staggerChildren(skillsRef.current, 0.3);
+    }
+  }, [mount]);
+
+  useEffect(() => {
+    if (mount && focusRef.current) {
+      const cards = focusRef.current.querySelectorAll(".focus-area-card");
+      if (cards.length > 0) {
+        scrollReveal(cards, { stagger: 0.1 });
+      }
     }
   }, [mount]);
 
@@ -63,22 +71,22 @@ const About = () => {
       </Head>
 
       <div className="container mx-auto mb-10">
-        <Header isBlog />
+        <Header />
         {mount && (
           <div className="mt-10 w-full flex flex-col items-center">
             <div
               className={`w-full ${
-                mount && theme === "dark" ? "bg-slate-800" : "bg-gray-50"
+                mount && theme === "dark" ? "bg-navy-800" : "bg-navy-50"
               } max-w-4xl p-20 mob:p-5 desktop:p-20 rounded-lg shadow-sm`}
             >
               <h1 ref={titleRef} className="text-4xl font-bold">About Me</h1>
 
               {/* Bio Section */}
               <div ref={contentRef} className="mt-8">
-                <p className="text-lg leading-relaxed opacity-80">
+                <p className="text-lg leading-relaxed text-navy-600 dark:text-navy-300">
                   {data.aboutpara}
                 </p>
-                <p className="text-lg leading-relaxed opacity-80 mt-4">
+                <p className="text-lg leading-relaxed text-navy-600 dark:text-navy-300 mt-4">
                   My work sits at the intersection of policy analysis, financial markets, and technology.
                   I leverage programming and automation to enhance research workflows, build analytical tools,
                   and develop insights into policy transmission mechanisms and market dynamics.
@@ -88,6 +96,24 @@ const About = () => {
               {/* Social Links */}
               <div className="mt-6">
                 <Socials />
+              </div>
+
+              {/* Focus Areas */}
+              <div className="mt-10" ref={focusRef}>
+                <h2 className="text-2xl font-bold mb-6">Focus Areas</h2>
+                <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4">
+                  {data.services.map((service, index) => (
+                    <div
+                      key={index}
+                      className="focus-area-card p-4 rounded-lg bg-white dark:bg-navy-800/80 border-l-2 border-accent opacity-0"
+                    >
+                      <h3 className="text-base font-semibold">{service.title}</h3>
+                      <p className="mt-2 text-sm text-navy-500 dark:text-navy-300">
+                        {service.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Skills Matrix */}
@@ -101,7 +127,7 @@ const About = () => {
                         {category.skills.map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
-                            className="px-3 py-1 text-sm rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200"
+                            className="px-3 py-1 text-sm rounded-full bg-navy-100 dark:bg-navy-700 text-navy-700 dark:text-navy-200"
                           >
                             {skill}
                           </span>
@@ -117,8 +143,8 @@ const About = () => {
                 <h2 className="text-2xl font-bold mb-4">Education</h2>
                 <div>
                   <h3 className="text-lg font-medium">{data.resume.education.universityName}</h3>
-                  <p className="text-sm opacity-75">{data.resume.education.universityDate}</p>
-                  <p className="text-base mt-2 opacity-70">{data.resume.education.universityPara}</p>
+                  <p className="text-sm text-navy-500 dark:text-navy-400">{data.resume.education.universityDate}</p>
+                  <p className="text-base mt-2 text-navy-600 dark:text-navy-300">{data.resume.education.universityPara}</p>
                 </div>
               </div>
 

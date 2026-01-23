@@ -1,9 +1,10 @@
 import gsap, { Power3, Power2 } from "gsap";
 import { ScrollToPlugin } from "gsap/dist/ScrollToPlugin";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-// Register ScrollToPlugin
+// Register plugins
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollToPlugin);
+  gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 }
 
 // Stagger animation for multiple elements
@@ -76,6 +77,79 @@ export const staggerChildren = (parent, delay = 0) => {
       ease: Power3.easeOut,
     }
   );
+};
+
+// Scroll-triggered reveal for elements entering the viewport
+export const scrollReveal = (target, options = {}) => {
+  const defaults = {
+    y: 30,
+    duration: 0.6,
+    stagger: 0.15,
+  };
+  const merged = { ...defaults, ...options };
+
+  return gsap.fromTo(
+    target,
+    { opacity: 0, y: merged.y },
+    {
+      opacity: 1,
+      y: 0,
+      duration: merged.duration,
+      stagger: merged.stagger,
+      ease: Power3.easeOut,
+      scrollTrigger: {
+        trigger: target,
+        start: "top 85%",
+        toggleActions: "play none none none",
+      },
+    }
+  );
+};
+
+// GSAP hover effect for navigation cards
+export const navCardHover = (cardElement) => {
+  const border = cardElement.querySelector(".nav-card-border");
+
+  const onEnter = () => {
+    gsap.to(cardElement, {
+      scale: 1.02,
+      duration: 0.3,
+      ease: Power2.easeOut,
+    });
+    if (border) {
+      gsap.to(border, {
+        scaleX: 1,
+        opacity: 1,
+        duration: 0.3,
+        ease: Power2.easeOut,
+      });
+    }
+  };
+
+  const onLeave = () => {
+    gsap.to(cardElement, {
+      scale: 1,
+      duration: 0.3,
+      ease: Power2.easeOut,
+    });
+    if (border) {
+      gsap.to(border, {
+        scaleX: 0,
+        opacity: 0,
+        duration: 0.3,
+        ease: Power2.easeIn,
+      });
+    }
+  };
+
+  cardElement.addEventListener("mouseenter", onEnter);
+  cardElement.addEventListener("mouseleave", onLeave);
+
+  // Return cleanup function
+  return () => {
+    cardElement.removeEventListener("mouseenter", onEnter);
+    cardElement.removeEventListener("mouseleave", onLeave);
+  };
 };
 
 // Smooth scroll to element

@@ -72,7 +72,7 @@ const Blog = ({ posts }) => {
             data.showCursor && "cursor-none"
           }`}
         >
-          <Header isBlog={true}></Header>
+          <Header></Header>
           <div className="mt-10">
             <h1
               ref={text}

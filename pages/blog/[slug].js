@@ -35,7 +35,7 @@ const BlogPost = ({ post }) => {
           data.showCursor && "cursor-none"
         }`}
       >
-        <Header isBlog={true} />
+        <Header />
         <div className="mt-10 flex flex-col">
           <img
             className="w-full h-96 rounded-lg shadow-lg object-cover"

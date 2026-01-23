@@ -65,23 +65,31 @@ const Research = ({ posts }) => {
     showBlog.current && (
       <>
         <Head>
-          <title>Research & Writing | {data.name}</title>
+          <title>Posts | {data.name}</title>
           <meta name="description" content="Essays, research notes, and policy commentary on central banking, markets, and investment analysis." />
-          <meta property="og:title" content={`Research & Writing | ${data.name}`} />
+          <meta property="og:title" content={`Posts | ${data.name}`} />
           <meta property="og:description" content="Essays, research notes, and policy commentary." />
         </Head>
         <div className="container mx-auto mb-10">
-          <Header isBlog={true}></Header>
-          <div className="mt-10">
+          <Header></Header>
+          <div className="mt-10 laptop:mt-16 p-2 laptop:p-0">
             <h1
               ref={text}
-              className="mx-auto mob:p-2 text-bold text-6xl laptop:text-8xl w-full"
+              className="text-lg font-semibold uppercase tracking-wide"
             >
-              Research & Writing.
+              Posts
             </h1>
-            <p className="mt-4 text-xl opacity-70 mob:p-2">
+            <p className="mt-2 text-sm text-navy-500 dark:text-navy-300 max-w-2xl">
               Essays, research notes, and commentary on policy, markets, and technology.
             </p>
+            <a
+              href={data.socials.find(s => s.title === "Substack")?.link || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-accent hover:opacity-80 transition-opacity"
+            >
+              Read on Substack &rarr;
+            </a>
             <div className="mt-10 grid grid-cols-1 mob:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 justify-between gap-10">
               {posts &&
                 posts.map((post) => (

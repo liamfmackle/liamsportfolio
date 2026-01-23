@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
+import React from "react";
 
 const ServiceCard = ({ name, description }) => {
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
   return (
     <div
-      className={`w-full p-2 mob:p-4 rounded-lg transition-all ease-out duration-300 ${
-        mounted && theme === "dark" ? "hover:bg-slate-800" : "hover:bg-slate-50"
-      } hover:scale-105 link`}
+      className="w-full p-4 rounded-lg transition-all ease-out duration-300 bg-navy-50 dark:bg-navy-800/50 border-l-2 border-accent"
     >
-      <h1 className="text-3xl">{name ? name : "Heading"}</h1>
-      <p className="mt-5 opacity-40 text-xl">
+      <h1 className="text-base font-semibold">{name ? name : "Heading"}</h1>
+      <p className="mt-2 text-sm text-navy-500 dark:text-navy-300">
         {description
           ? description
-          : "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. "}
+          : "Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
       </p>
     </div>
   );

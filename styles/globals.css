@@ -1,15 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Hind:wght@400;500;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @import "./markdown.css";
 
 * {
-  font-family: "Hind";
+  font-family: "Inter", "Hind", sans-serif;
 }
 
 body {
-  @apply dark:bg-slate-900 dark:text-white;
+  @apply bg-white text-navy-900 dark:bg-navy-900 dark:text-navy-100;
 }
 
 /* Professional subtle hover effect */
@@ -27,5 +27,22 @@ body {
 }
 
 .card-hover:hover {
-  @apply shadow-lg transform -translate-y-1;
+  @apply shadow-md;
+}
+
+/* Section divider */
+.section-divider {
+  @apply border-t border-navy-200 dark:border-navy-700 pt-10 mt-10;
+}
+
+/* Nav card base state */
+.nav-card {
+  @apply transition-colors duration-300;
+}
+
+/* Ensure GSAP-animated elements don't flash */
+.nav-card,
+.project-card,
+.focus-area-card {
+  will-change: transform, opacity;
 }
