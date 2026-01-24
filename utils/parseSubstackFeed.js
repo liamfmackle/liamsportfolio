@@ -1,4 +1,23 @@
+import https from "https";
+
 const FEED_URL = "https://liamfmackle.substack.com/feed";
+
+function fetchFeed(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        return fetchFeed(res.headers.location).then(resolve, reject);
+      }
+      if (res.statusCode !== 200) {
+        return reject(new Error(`HTTP ${res.statusCode}`));
+      }
+      let data = "";
+      res.on("data", (chunk) => { data += chunk; });
+      res.on("end", () => resolve(data));
+      res.on("error", reject);
+    }).on("error", reject);
+  });
+}
 
 function stripHtml(html) {
   return html
@@ -26,11 +45,7 @@ function extractTag(xml, tag) {
 
 export async function parseSubstackFeed() {
   try {
-    const res = await fetch(FEED_URL);
-    if (!res.ok) {
-      return { title: "Liam's Newsletter", description: "", posts: [] };
-    }
-    const xml = await res.text();
+    const xml = await fetchFeed(FEED_URL);
 
     const channelEnd = xml.indexOf("<item>");
     const channelXml = channelEnd > -1 ? xml.slice(0, channelEnd) : xml;
