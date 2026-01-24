@@ -1,21 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import Header from "../components/Header";
-import Socials from "../components/Socials";
-import Button from "../components/Button";
 import { useTheme } from "next-themes";
 import Head from "next/head";
 import { useIsomorphicLayoutEffect } from "../utils";
-import { slideInUp, staggerChildren, scrollReveal } from "../animations";
-// Data
+import { slideInUp, staggerChildren } from "../animations";
 import data from "../data/portfolio.json";
 
 const About = () => {
   const { theme } = useTheme();
   const [mount, setMount] = useState(false);
   const titleRef = useRef();
-  const contentRef = useRef();
-  const focusRef = useRef();
-  const skillsRef = useRef();
+  const pillarsRef = useRef();
 
   useEffect(() => {
     setMount(true);
@@ -25,139 +20,78 @@ const About = () => {
     if (mount && titleRef.current) {
       slideInUp(titleRef.current, 0.5, 0.1);
     }
-    if (mount && contentRef.current) {
-      staggerChildren(contentRef.current, 0.2);
-    }
-    if (mount && skillsRef.current) {
-      staggerChildren(skillsRef.current, 0.3);
+    if (mount && pillarsRef.current) {
+      staggerChildren(pillarsRef.current, 0.15);
     }
   }, [mount]);
 
-  useEffect(() => {
-    if (mount && focusRef.current) {
-      const cards = focusRef.current.querySelectorAll(".focus-area-card");
-      if (cards.length > 0) {
-        scrollReveal(cards, { stagger: 0.1 });
-      }
-    }
-  }, [mount]);
-
-  const skillCategories = [
+  const pillars = [
     {
-      title: "Policy & Supervision",
-      skills: ["ECB Policy Frameworks", "Monetary Policy Operations", "Funds Supervision", "Capital Adequacy", "Operational Risk", "Enforcement"]
+      label: "Finance",
+      text: "ECB policy and supervision, rates and collateral frameworks, CFA Level 1. Deep understanding of how monetary policy transmits through markets.",
     },
     {
-      title: "Markets & Investment",
-      skills: ["CFA Level 1", "Financial Ratio Analysis", "DCF Modelling", "Collateral Frameworks", "Payments Infrastructure"]
+      label: "Technical",
+      text: "Python, React, data pipelines, and AI-assisted research. I build tools that turn complex data into clear, actionable insight.",
     },
     {
-      title: "Technical & Data",
-      skills: data.resume.languages.concat(data.resume.frameworks)
+      label: "Drive",
+      text: "First Class Honours, top of cohort. I work at the intersection of policy and markets because the problems there demand both rigour and creativity.",
     },
-    {
-      title: "Tools & Methods",
-      skills: data.resume.others
-    }
   ];
 
   return (
     <>
       <Head>
         <title>About | {data.name}</title>
-        <meta name="description" content={`About ${data.name} - Central banking professional with expertise in policy analysis, markets, and technical development.`} />
-        <meta property="og:title" content={`About | ${data.name}`} />
-        <meta property="og:description" content="Professional background in central banking, markets, and technical development." />
+        <meta name="description" content={`${data.name} — finance, technology, and policy.`} />
       </Head>
 
       <div className="relative container mx-auto mb-10">
-        {/* Page-level teal gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-teal-50/20 to-white dark:from-teal-900/10 dark:to-navy-900 pointer-events-none" />
         <Header />
         {mount && (
-          <div className="relative mt-10 w-full flex flex-col items-center">
+          <div className="relative mt-10 laptop:mt-16 w-full flex flex-col items-center">
             <div
-              className={`w-full ${
-                mount && theme === "dark" ? "bg-navy-800" : "bg-navy-50"
-              } max-w-4xl p-20 mob:p-5 desktop:p-20 rounded-lg shadow-sm`}
+              className={`w-full max-w-3xl p-10 mob:p-5 rounded-lg shadow-sm ${
+                theme === "dark" ? "bg-navy-800" : "bg-navy-50"
+              }`}
             >
-              <h1 ref={titleRef} className="text-4xl font-bold">About Me</h1>
+              <h1 ref={titleRef} className="text-3xl font-bold">
+                About
+              </h1>
 
-              {/* Bio Section */}
-              <div ref={contentRef} className="mt-8">
-                <p className="text-lg leading-relaxed text-navy-600 dark:text-navy-300">
-                  {data.aboutpara}
-                </p>
-                <p className="text-lg leading-relaxed text-navy-600 dark:text-navy-300 mt-4">
-                  I hold an MSc and BSc in Economics from Queen&apos;s University Belfast (First Class Honours, Top 3 in cohort)
-                  and have passed CFA Level 1. I use Python, advanced Excel, and AI tools to build
-                  analytical workflows and enhance research output.
-                </p>
+              <p className="mt-6 text-base leading-relaxed text-navy-600 dark:text-navy-300">
+                I bridge central banking and investment analysis with technical tools.
+                My background spans ECB prudential supervision, monetary policy operations,
+                and quantitative research — and I build software to sharpen every edge of that work.
+              </p>
+
+              <div ref={pillarsRef} className="mt-10 grid grid-cols-1 tablet:grid-cols-3 gap-6">
+                {pillars.map((pillar) => (
+                  <div
+                    key={pillar.label}
+                    className="border-t-2 border-teal-400 pt-4"
+                  >
+                    <h2 className="text-sm font-semibold uppercase tracking-wide text-teal-600 dark:text-teal-400">
+                      {pillar.label}
+                    </h2>
+                    <p className="mt-2 text-sm leading-relaxed text-navy-600 dark:text-navy-300">
+                      {pillar.text}
+                    </p>
+                  </div>
+                ))}
               </div>
 
-              {/* Social Links */}
-              <div className="mt-6">
-                <Socials />
-              </div>
-
-              {/* Focus Areas */}
-              <div className="mt-10" ref={focusRef}>
-                <h2 className="text-2xl font-bold mb-6">Focus Areas</h2>
-                <div className="grid grid-cols-1 tablet:grid-cols-2 gap-4">
-                  {data.services.map((service, index) => (
-                    <div
-                      key={index}
-                      className="focus-area-card p-4 rounded-lg bg-white dark:bg-navy-800/80 border-l-2 border-teal-400 opacity-0"
-                    >
-                      <h3 className="text-base font-semibold">{service.title}</h3>
-                      <p className="mt-2 text-sm text-navy-500 dark:text-navy-300">
-                        {service.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Skills Matrix */}
-              <div className="mt-10">
-                <h2 className="text-2xl font-bold mb-6">Skills & Expertise</h2>
-                <div ref={skillsRef} className="grid grid-cols-1 tablet:grid-cols-2 gap-6">
-                  {skillCategories.map((category, index) => (
-                    <div key={index} className="mb-4">
-                      <h3 className="text-lg font-semibold mb-3">{category.title}</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {category.skills.map((skill, skillIndex) => (
-                          <span
-                            key={skillIndex}
-                            className="px-3 py-1 text-sm rounded-full bg-navy-100 dark:bg-navy-700 text-navy-700 dark:text-navy-200"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Education */}
-              <div className="mt-10">
-                <h2 className="text-2xl font-bold mb-4">Education</h2>
-                <div>
-                  <h3 className="text-lg font-medium">{data.resume.education.universityName}</h3>
-                  <p className="text-sm text-navy-500 dark:text-navy-400">{data.resume.education.universityDate}</p>
-                  <p className="text-base mt-2 text-navy-600 dark:text-navy-300">{data.resume.education.universityPara}</p>
-                </div>
-              </div>
-
-              {/* CV Download */}
-              <div className="mt-10">
-                <Button
-                  onClick={() => window.open("/cv.pdf")}
-                  type="primary"
+              <div className="mt-10 pt-6 border-t border-navy-200 dark:border-navy-700">
+                <a
+                  href="/cv.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-navy-500 dark:text-navy-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors"
                 >
-                  Download CV
-                </Button>
+                  View CV &rarr;
+                </a>
               </div>
             </div>
           </div>

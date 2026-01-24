@@ -14,8 +14,7 @@
     { "id": "1", "title": "GitHub", "link": "https://github.com/liamfmackle" },
     { "id": "2", "title": "LinkedIn", "link": "https://www.linkedin.com/in/liam-mackle-79030613b/" },
     { "id": "3", "title": "Email", "link": "mailto:mackleliam@yahoo.co.uk" },
-    { "id": "4", "title": "CV", "link": "/CV Liam Mackle 2025.pdf" },
-    { "id": "5", "title": "Substack", "link": "https://liamfmackle.substack.com" }
+    { "id": "4", "title": "Substack", "link": "https://liamfmackle.substack.com" }
   ],
   "projects": [
     {
