@@ -20,90 +20,77 @@
   "projects": [
     {
       "id": "1",
-      "title": "News Arbitrage Web App",
-      "description": "Real-time news aggregation and sentiment analysis for market signals",
+      "title": "NewsArb",
+      "description": "Real-time news aggregation and sentiment analysis for identifying market signals across multiple sources",
       "imageSrc": "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800",
       "url": "https://github.com/liamfmackle/NewsArb",
-      "techStack": ["Python", "React", "RSS", "NLP"],
-      "tags": ["markets", "web app", "AI tools"]
+      "techStack": ["Python", "React", "RSS", "NLP"]
     },
     {
       "id": "2",
-      "title": "Markets Modeling Tools",
-      "description": "Quantitative analysis and modeling for rates and fixed income",
-      "imageSrc": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800",
-      "url": "[REPO_LINK]",
-      "techStack": ["Python", "Pandas", "NumPy"],
-      "tags": ["markets", "modeling"]
-    },
-    {
-      "id": "3",
-      "title": "Policy Dashboard",
-      "description": "Supervisory monitoring and risk framework visualization",
-      "imageSrc": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
-      "url": "[REPO_LINK]",
-      "techStack": ["React", "D3.js", "Python"],
-      "tags": ["policy", "web app"]
-    },
-    {
-      "id": "4",
-      "title": "AI Research Pipeline",
-      "description": "Automated research workflows with AI-assisted analysis",
-      "imageSrc": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800",
-      "url": "[REPO_LINK]",
-      "techStack": ["Python", "LLM APIs", "Automation"],
-      "tags": ["AI tools", "automation"]
+      "title": "Instapaper Brief",
+      "description": "CLI tool to manage Instapaper bookmarks with AI-powered summaries, full-text search, and daily digest generation",
+      "imageSrc": "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?w=800",
+      "url": "https://github.com/liamfmackle/instapaper-brief",
+      "techStack": ["Python", "SQLite", "OAuth", "AI/LLM"]
     }
   ],
   "services": [
     {
       "id": "1",
-      "title": "Policy Analysis",
-      "description": "Central bank operations, monetary policy transmission, and regulatory frameworks"
+      "title": "ECB Policy & Operations",
+      "description": "Monetary policy operational framework, payments infrastructure, collateral frameworks, and Market Operations Committee briefings"
     },
     {
       "id": "2",
-      "title": "Markets & Investment",
-      "description": "Rates, collateral frameworks, fixed income analysis, and market operations"
+      "title": "Financial Supervision",
+      "description": "Fund depositary oversight, capital adequacy assessment, operational risk reviews, and C-suite engagement on governance"
     },
     {
       "id": "3",
-      "title": "Technical Development",
-      "description": "Web applications, automation pipelines, data analysis, and AI-assisted workflows"
+      "title": "Data & Automation",
+      "description": "Financial modelling, data analysis with Python and Excel, monitoring tools, and AI-assisted research workflows"
     },
     {
       "id": "4",
-      "title": "Research & Writing",
-      "description": "Policy commentary, market analysis essays, and technical documentation"
+      "title": "Investment Analysis",
+      "description": "CFA Level 1, financial ratio analysis, DCF modelling, and macro-policy research"
     }
   ],
-  "aboutpara": "I combine central banking expertise with technical skills to analyze policy transmission, market dynamics, and investment opportunities. My background spans ECB prudential supervision, rates and collateral frameworks, and market operations. I build web applications, automation tools, and AI-assisted research pipelines to enhance analytical workflows. Currently focused on bridging policy analysis with quantitative investment research.",
+  "aboutpara": "I work at the Central Bank of Ireland on ECB policy, covering monetary policy operational framework, payments infrastructure, and collateral frameworks. Previously I supervised fund depositaries holding over $2tn in assets, leading engagement with C-suite executives on capital adequacy, operational resilience, and governance risk. I build tools and automation to enhance analytical workflows, and I'm focused on bridging policy analysis with quantitative investment research.",
   "resume": {
-    "tagline": "Central Banking | Markets | Technology",
-    "description": "Policy and markets professional with hands-on experience in ECB supervision, rates, collateral frameworks, and technical development. Building toward investment analysis and macro-policy research roles.",
+    "tagline": "Central Banking | Markets | CFA",
+    "description": "Senior Policy Associate at the Central Bank of Ireland with experience spanning ECB monetary policy, funds supervision, and enforcement. CFA Level 1 passed. Building toward investment analysis and macro-policy research.",
     "experiences": [
       {
         "id": "1",
-        "dates": "[DATE] - Present",
+        "dates": "January 2025 - Present",
         "type": "Full Time",
-        "position": "Policy/Supervision Role at [Institution]",
-        "bullets": "Prudential supervision and regulatory analysis, ECB policy framework implementation, Risk assessment and monitoring"
+        "position": "Senior Policy Associate – ECB Policy, Central Bank of Ireland",
+        "bullets": "ECB Governing Council briefings on monetary policy operational framework, European payments infrastructure project with Dutch and German colleagues, Written briefing for ECB Market Operations Committee on operational readiness and collateral framework"
       },
       {
         "id": "2",
-        "dates": "[DATE] - [DATE]",
+        "dates": "April 2022 - January 2025",
         "type": "Full Time",
-        "position": "Markets/Operations Role at [Institution]",
-        "bullets": "Rates and collateral framework analysis, Market operations support, Policy transmission research"
+        "position": "Associate Supervisor – Funds Supervision, Central Bank of Ireland",
+        "bullets": "Managed global custody outsourcing data project for fund depositaries holding $2tn+ in assets, Led C-suite engagement meetings on capital adequacy and operational resilience, On-site operational risk assessment of $600bn fund depositary"
+      },
+      {
+        "id": "3",
+        "dates": "October 2020 - April 2022",
+        "type": "Full Time",
+        "position": "Associate Investigator – Enforcement, Central Bank of Ireland",
+        "bullets": "Developed Excel sanctioning model for quantifying fines for a large bank, Drafted Investigation Report chapters used in High Court referral of Administrative Sanctions case"
       }
     ],
     "education": {
-      "universityName": "[University Name]",
-      "universityDate": "[Years]",
-      "universityPara": "[Degree in Finance/Economics/Related Field]. Relevant coursework in monetary economics, financial markets, and quantitative methods."
+      "universityName": "Queen's University Belfast",
+      "universityDate": "2015 - 2019",
+      "universityPara": "MSc Economics (2018-2019) and BSc Economics (2015-2018, First Class Honours, Top 3 in cohort). Dissertation on technology's role in the price mechanism. CFA Level 1 passed April 2024."
     },
-    "languages": ["Python", "JavaScript", "SQL", "R"],
-    "frameworks": ["React", "Next.js", "Pandas", "NumPy"],
-    "others": ["Central Bank Operations", "Policy Analysis", "Risk Frameworks", "Bloomberg", "Data Visualization"]
+    "languages": ["Python", "Excel (DCF, scenario analysis)", "JavaScript", "SQL"],
+    "frameworks": ["Pandas", "React", "Next.js", "NumPy"],
+    "others": ["ECB Policy Frameworks", "Funds Supervision", "Risk Assessment", "Financial Ratio Analysis", "AI Prompt Engineering", "Data Visualization"]
   }
 }

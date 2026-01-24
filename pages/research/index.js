@@ -7,8 +7,9 @@ import Header from "../../components/Header";
 import data from "../../data/portfolio.json";
 import { ISOToDate, useIsomorphicLayoutEffect } from "../../utils";
 import { getAllPosts } from "../../utils/api";
+import { parseSubstackFeed } from "../../utils/parseSubstackFeed";
 
-const Research = ({ posts }) => {
+const Research = ({ posts, substackFeed }) => {
   const showBlog = useRef(data.showBlog);
   const text = useRef();
   const router = useRouter();
@@ -70,26 +71,70 @@ const Research = ({ posts }) => {
           <meta property="og:title" content={`Posts | ${data.name}`} />
           <meta property="og:description" content="Essays, research notes, and policy commentary." />
         </Head>
-        <div className="container mx-auto mb-10">
+        <div className="relative container mx-auto mb-10">
+          {/* Subtle top gradient */}
+          <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-navy-50/60 to-transparent dark:from-navy-800/40 dark:to-transparent pointer-events-none" />
           <Header></Header>
           <div className="mt-10 laptop:mt-16 p-2 laptop:p-0">
             <h1
               ref={text}
-              className="text-lg font-semibold uppercase tracking-wide"
+              className="text-lg font-semibold uppercase tracking-wide border-l-2 border-teal-400 pl-3"
             >
               Posts
             </h1>
             <p className="mt-2 text-sm text-navy-500 dark:text-navy-300 max-w-2xl">
               Essays, research notes, and commentary on policy, markets, and technology.
             </p>
-            <a
-              href={data.socials.find(s => s.title === "Substack")?.link || "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-accent hover:opacity-80 transition-opacity"
-            >
-              Read on Substack &rarr;
-            </a>
+            {/* Substack Newsletter Card */}
+            {substackFeed && (
+              <a
+                href={data.socials.find(s => s.title === "Substack")?.link || "https://liamfmackle.substack.com"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block mt-8 max-w-sm rounded-lg border border-navy-200 dark:border-navy-700 overflow-hidden hover:border-teal-400 dark:hover:border-teal-500 transition-colors duration-200"
+              >
+                <div className="px-4 py-3 bg-navy-50 dark:bg-navy-800 flex items-center justify-between">
+                  <span className="text-sm font-semibold text-navy-800 dark:text-navy-100">
+                    {substackFeed.title}
+                  </span>
+                  <span className="text-xs text-teal-500 dark:text-teal-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Subscribe &rarr;
+                  </span>
+                </div>
+                <div className="px-4 py-3 bg-white dark:bg-navy-900">
+                  {substackFeed.posts.length > 0 ? (
+                    <ul className="space-y-2">
+                      {substackFeed.posts.map((item, i) => (
+                        <li key={i} className="flex items-baseline justify-between gap-3">
+                          <span className="text-sm text-navy-700 dark:text-navy-200 truncate">
+                            {item.title}
+                          </span>
+                          {item.date && (
+                            <span className="text-xs text-navy-400 dark:text-navy-500 whitespace-nowrap">
+                              {new Date(item.date).toLocaleDateString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                              })}
+                            </span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-sm text-navy-400 dark:text-navy-500 text-center py-1">
+                      Coming soon
+                    </p>
+                  )}
+                </div>
+                <div className="px-4 py-2 bg-navy-50 dark:bg-navy-800 flex items-center justify-between border-t border-navy-100 dark:border-navy-700">
+                  <span className="text-xs text-navy-400 dark:text-navy-500">Substack</span>
+                  <span className="text-xs text-teal-500 dark:text-teal-400 group-hover:translate-x-0.5 transition-transform">
+                    &rarr;
+                  </span>
+                </div>
+              </a>
+            )}
+
             <div className="mt-10 grid grid-cols-1 mob:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 justify-between gap-10">
               {posts &&
                 posts.map((post) => (
@@ -148,10 +193,14 @@ export async function getStaticProps() {
     "date",
   ]);
 
+  const substackFeed = await parseSubstackFeed();
+
   return {
     props: {
       posts: [...posts],
+      substackFeed,
     },
+    revalidate: 3600,
   };
 }
 

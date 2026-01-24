@@ -33,12 +33,14 @@ export default function Projects() {
         <meta name="description" content="Technical projects in policy tools, market analysis, automation, and AI research." />
       </Head>
 
-      <div className="container mx-auto mb-10">
+      <div className="relative container mx-auto mb-10">
+        {/* Subtle top gradient */}
+        <div className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-navy-50/60 to-transparent dark:from-navy-800/40 dark:to-transparent pointer-events-none" />
         <Header />
 
         <div className="mt-10 laptop:mt-16 p-2 laptop:p-0">
           <div ref={titleRef} className="opacity-0">
-            <h1 className="text-lg font-semibold uppercase tracking-wide">
+            <h1 className="text-lg font-semibold uppercase tracking-wide border-l-2 border-teal-400 pl-3">
               Projects
             </h1>
             <p className="mt-2 text-sm text-navy-500 dark:text-navy-300 max-w-2xl">

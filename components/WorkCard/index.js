@@ -29,7 +29,7 @@ const WorkCard = ({ img, name, description, onClick, techStack }) => {
           {techStack.map((tech, index) => (
             <span
               key={index}
-              className="px-2 py-0.5 text-xs rounded-full bg-navy-100 dark:bg-navy-800 text-navy-800 dark:text-navy-100"
+              className="px-2 py-0.5 text-xs rounded-full bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300"
             >
               {tech}
             </span>

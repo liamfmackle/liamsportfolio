@@ -45,18 +45,18 @@ const About = () => {
   const skillCategories = [
     {
       title: "Policy & Supervision",
-      skills: ["Central Bank Operations", "Prudential Supervision", "Regulatory Frameworks", "Risk Assessment", "Policy Analysis"]
+      skills: ["ECB Policy Frameworks", "Monetary Policy Operations", "Funds Supervision", "Capital Adequacy", "Operational Risk", "Enforcement"]
     },
     {
       title: "Markets & Investment",
-      skills: ["Rates Analysis", "Collateral Frameworks", "Fixed Income", "Market Operations", "Macro Research"]
+      skills: ["CFA Level 1", "Financial Ratio Analysis", "DCF Modelling", "Collateral Frameworks", "Payments Infrastructure"]
     },
     {
       title: "Technical & Data",
       skills: data.resume.languages.concat(data.resume.frameworks)
     },
     {
-      title: "Tools & Platforms",
+      title: "Tools & Methods",
       skills: data.resume.others
     }
   ];
@@ -70,10 +70,12 @@ const About = () => {
         <meta property="og:description" content="Professional background in central banking, markets, and technical development." />
       </Head>
 
-      <div className="container mx-auto mb-10">
+      <div className="relative container mx-auto mb-10">
+        {/* Page-level teal gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-teal-50/20 to-white dark:from-teal-900/10 dark:to-navy-900 pointer-events-none" />
         <Header />
         {mount && (
-          <div className="mt-10 w-full flex flex-col items-center">
+          <div className="relative mt-10 w-full flex flex-col items-center">
             <div
               className={`w-full ${
                 mount && theme === "dark" ? "bg-navy-800" : "bg-navy-50"
@@ -87,9 +89,9 @@ const About = () => {
                   {data.aboutpara}
                 </p>
                 <p className="text-lg leading-relaxed text-navy-600 dark:text-navy-300 mt-4">
-                  My work sits at the intersection of policy analysis, financial markets, and technology.
-                  I leverage programming and automation to enhance research workflows, build analytical tools,
-                  and develop insights into policy transmission mechanisms and market dynamics.
+                  I hold an MSc and BSc in Economics from Queen&apos;s University Belfast (First Class Honours, Top 3 in cohort)
+                  and have passed CFA Level 1. I use Python, advanced Excel, and AI tools to build
+                  analytical workflows and enhance research output.
                 </p>
               </div>
 
@@ -105,7 +107,7 @@ const About = () => {
                   {data.services.map((service, index) => (
                     <div
                       key={index}
-                      className="focus-area-card p-4 rounded-lg bg-white dark:bg-navy-800/80 border-l-2 border-accent opacity-0"
+                      className="focus-area-card p-4 rounded-lg bg-white dark:bg-navy-800/80 border-l-2 border-teal-400 opacity-0"
                     >
                       <h3 className="text-base font-semibold">{service.title}</h3>
                       <p className="mt-2 text-sm text-navy-500 dark:text-navy-300">

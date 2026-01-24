@@ -40,6 +40,11 @@ body {
   @apply transition-colors duration-300;
 }
 
+/* Prevent horizontal scrollbar during page slide transitions */
+.page-transition-container {
+  overflow-x: hidden;
+}
+
 /* Ensure GSAP-animated elements don't flash */
 .nav-card,
 .project-card,
